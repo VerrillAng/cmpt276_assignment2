@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/display.css">
+    <script src="/js/display.js" defer></script>
+</head>
+<body>
+    <div name="navigation">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="/add.html">Add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/students/view">Data</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Display</a>
+          </li>
+        </ul>
+    </div>
+    <span>
+        <!-- <img src="/img/male.png">
+        <img src="/img/female.png"> -->
+        <!-- <img src="/img/male.png" style="width: 200px; height: 165px;"> -->
+    </span>
+    <div class="row">
+        <div class="col-sm-5" style="margin-left: 40px; margin-top: 40px;" th:each="student: ${students}"> 
+            <!-- <div class="card mb-3" style="max-width: 540px;"> -->
+            <div class="card mb-3" style="border:2px solid #dcdcdc; width: 600px;">
+                <div class="row g-0">
+                  <!--  -->
+                  <!-- THE THING -->
+                  <!--  -->
+                  <div class="col-md-4 text-center" style="border-right:2px solid #dcdcdc;">
+                    <span th:if="${student.gender == 'Male'}">
+                        <img src="/img/male.png" class="rounded-start" alt="Male" style="margin-top: 25px; margin-bottom: 10px; width: 60%;">
+                    </span>
+                    <span th:if="${student.gender == 'Female'}">
+                        <img src="/img/female.png" class="rounded-start" alt="Female" style="margin-top: 25px; margin-bottom: 10px; width: 70%;">
+                    </span>
+                    <span th:if="${student.gender == 'Prefer not to say'}">
+                      <img src="/img/Question_mark.png" class="rounded-start" alt="Question_Mark" style="margin-top: 55px; margin-bottom: 10px; width: 80%;">
+                  </span>
+                  </div>
+
+                  <div class="col-md-8">
+                    <div class="card-body" style="width: 300px; margin-right: 0px;">
+                      <h5 class="card-title" th:text="${student.name}" id="theName" th:style="'color:'+${student.hairColor}"></h5>
+                      <p class="card-text">
+                        <table class="dataTable" style="margin-bottom: 20px;">
+                            <tr>
+                                <td style="width: 100px;">Weight </td>
+                                <td>:</td>
+                                <td th:text="${student.weight}"></td>
+                            </tr>
+                            <tr>
+                                <td>Height </td>
+                                <td>:</td>
+                                <td th:text="${student.height}"></td>
+                            </tr>
+                            <tr>
+                                <td>Hair Color </td>
+                                <td>:</td>
+                                <td th:text="${student.hairColor}" id="theHairColor"></td>
+                            </tr>
+                            <tr>
+                                <td>GPA </td>
+                                <td>:</td>
+                                <td th:text="${student.gpa}"></td>
+                            </tr>
+                            <tr>
+                                <td>Hobby </td>
+                                <td>:</td>
+                                <td th:text="${student.hobby}"></td>
+                            </tr>
+                            <tr>
+                                <td>Nationality </td>
+                                <td>:</td>
+                                <td th:text="${student.nationality}"></td>
+                            </tr>
+                            <tr>
+                              <td>Gender </td>
+                              <td>:</td>
+                              <td th:text="${student.gender}"></td>
+                          </tr>
+                        </table>
+                        <span>
+                            <a th:href="'/students/update/'+${student.uid}" class="btn btn-primary" style="margin-right: 20px; width: 80px;">Edit</a>
+                            <a th:href="'/students/delete/'+${student.uid}" class="btn btn-primary btn-danger" style="width: 80px;">Delete</a>
+                            <!-- <a th:href="@{/students/delete/{uid}(id=${student.uid})}" class="btn btn-primary" style="width: 80px;">Delete</a> -->
+                        </span>
+                        
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+</body>
+</html>
